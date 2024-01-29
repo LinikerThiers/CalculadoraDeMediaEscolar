@@ -1,13 +1,25 @@
 package calculomedia;
 
+import java.text.DecimalFormat;
+
 public class CalculoMedia {
     public static double calcularMedia(double[] notas) {
-        int soma = 0;
+
+        double soma = 0;
 
         for (int i = 0; i < notas.length; i++) {
             soma += notas[i];
         }
 
-        return soma / notas.length;
+        DecimalFormat formato = new DecimalFormat("#.#");
+
+        double mediaFinal = soma / notas.length;
+
+        String mediaFormatadaString = formato.format(mediaFinal);
+        mediaFormatadaString = mediaFormatadaString.replace(',', '.');
+
+        double mediaFormatada = Double.parseDouble(mediaFormatadaString);
+
+        return mediaFormatada;
     }
 }

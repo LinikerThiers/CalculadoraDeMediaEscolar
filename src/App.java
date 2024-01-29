@@ -18,6 +18,9 @@ public class App {
         System.out.printf("\nQual a media necessaria para a aprovacao? ");
         double mediaAprovacao = ler.nextDouble();
 
+        System.out.printf("\nQual a media minima para a recuperacao? ");
+        double mediaRecuperacao = ler.nextDouble();
+
         System.out.println(" ");
 
         double[][] alunos = new double[quantidadeAlunos][];
@@ -41,7 +44,7 @@ public class App {
 
             double media = CalculoMedia.calcularMedia(alunos[i]);
             System.out.printf("\nMédia do aluno " + (i + 1) + ": " + media + "\n");
-            CondicaoAprovacao.CondicaoMedia(mediaAprovacao, media);
+            CondicaoAprovacao.CondicaoMedia(media, mediaAprovacao, mediaRecuperacao);
         }
 
         ler.close();
