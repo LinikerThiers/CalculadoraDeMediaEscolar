@@ -5,7 +5,9 @@ import java.text.DecimalFormat;
 public class CalculoMedia {
     public static double calcularMediaAritmetica(double[] notas) {
 
-        double soma = 0;
+        double soma, mediaFinal;
+
+        soma = 0;
 
         for (int i = 0; i < notas.length; i++) {
             soma += notas[i];
@@ -13,7 +15,7 @@ public class CalculoMedia {
 
         DecimalFormat formato = new DecimalFormat("#.#");
 
-        double mediaFinal = soma / notas.length;
+        mediaFinal = soma / notas.length;
 
         String mediaFormatadaString = formato.format(mediaFinal);
         mediaFormatadaString = mediaFormatadaString.replace(',', '.');
@@ -22,8 +24,11 @@ public class CalculoMedia {
     }
 
     public static double calcularMediaPonderada(double[] notas, double[][] pesoNotas) {
-        double soma = 0;
-        double somaPesos = 0;
+
+        double soma, somaPesos, mediaFinal;
+
+        soma = 0;
+        somaPesos = 0;
 
         for (int i = 0; i < notas.length; i++) {
             soma += notas[i] * pesoNotas[i][0];
@@ -32,7 +37,7 @@ public class CalculoMedia {
 
         DecimalFormat formato = new DecimalFormat("#.#");
 
-        double mediaFinal = soma / somaPesos;
+        mediaFinal = soma / somaPesos;
 
         String mediaFormatadaString = formato.format(mediaFinal);
         mediaFormatadaString = mediaFormatadaString.replace(',', '.');
