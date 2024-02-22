@@ -74,8 +74,8 @@ public class App {
                         System.out.println("Insira o peso para a nota " + (i + 1) + ": ");
                         // trocar a , pelo .
                         pesoNotas[i][0] = Double.parseDouble(ler.next().replace(',', '.'));
-                        
-                        if(pesoNotas[i][0] < 0){
+
+                        if (pesoNotas[i][0] < 0) {
                             System.out.println("Por favor, insira um número maior do que 0");
                         } else {
                             break;
@@ -92,9 +92,10 @@ public class App {
             try {
                 System.out.printf("\nQual a media necessaria para a aprovacao? ");
                 mediaAprovacao = Double.parseDouble(ler.next().replace(',', '.'));
-                
-                if(mediaAprovacao <= 0){
-                    System.out.println("Insira um valor numérico maior do que 0. Use '.' ou ',' como separador decimal");
+
+                if (mediaAprovacao <= 0) {
+                    System.out
+                            .println("Insira um valor numérico maior do que 0. Use '.' ou ',' como separador decimal");
                 }
 
             } catch (NumberFormatException e) {
@@ -107,9 +108,10 @@ public class App {
             try {
                 System.out.printf("\nQual a media minima para a recuperacao? ");
                 mediaRecuperacao = Double.parseDouble(ler.next().replace(',', '.'));
-                
-                if(mediaRecuperacao <= 0){
-                    System.out.println("Insira um valor numérico maior do que 0. Use '.' ou ',' como separador decimal");
+
+                if (mediaRecuperacao <= 0) {
+                    System.out
+                            .println("Insira um valor numérico maior do que 0. Use '.' ou ',' como separador decimal");
                 }
 
             } catch (NumberFormatException e) {
@@ -122,22 +124,34 @@ public class App {
 
         double[][] alunos = new double[quantidadeAlunos][];
 
+        String[] nomesAlunos = new String[quantidadeAlunos];
+
         // Criando a quantidade de array escolhida pelo usuario
         for (int i = 0; i < alunos.length; i++) {
+
+            ler.nextLine();
+
+            // inserir o nome do aluno
+            System.out.println("Digite o nome do aluno " + (i + 1) + ": ");
+            nomesAlunos[i] = ler.nextLine();
+            System.out.println(" ");
+
             alunos[i] = new double[quantidadeNotas];
         }
+
+        System.out.println(" ");
 
         // Inserindo cada nota dos alunos
         for (int i = 0; i < alunos.length; i++) {
             for (int j = 0; j < alunos[i].length; j++) {
                 while (true) {
                     try {
-                        System.out.printf("Digite a nota " + (j + 1) + " do aluno " + (i + 1) + ": ");
+                        System.out.printf("Digite a nota " + (j + 1) + " do aluno " + nomesAlunos[i] + ": ");
                         alunos[i][j] = Double.parseDouble(ler.next().replace(',', '.'));
-                        
-                        if(alunos[i][j] <= 0){
+
+                        if (alunos[i][j] <= 0) {
                             System.out.println("Por favor, insira um numero maior do que 0 para a nota");
-                        }else{
+                        } else {
                             break;
                         }
                     } catch (NumberFormatException e) {
@@ -145,12 +159,13 @@ public class App {
                         ler.nextLine();
                     }
                 }
+                System.out.println(" ");
             }
         }
 
         // Resultado das notas digitadas
         for (int i = 0; i < alunos.length; i++) {
-            System.out.printf("\nNotas do Aluno " + (i + 1) + ": ");
+            System.out.printf("\nNotas do Aluno " + nomesAlunos[i] + ": ");
             for (int j = 0; j < alunos[i].length; j++) {
                 System.out.printf(alunos[i][j] + "  ");
             }
@@ -163,7 +178,7 @@ public class App {
                 media = CalculoMedia.calcularMediaAritmetica(alunos[i]);
             }
 
-            System.out.printf("\nMédia do aluno " + (i + 1) + ": " + media + "\n");
+            System.out.printf("\nMédia do aluno " + nomesAlunos[i] + ": " + media + "\n");
             CondicaoAprovacao.CondicaoMedia(media, mediaAprovacao, mediaRecuperacao);
         }
 
