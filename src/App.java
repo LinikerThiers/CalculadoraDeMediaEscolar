@@ -1,7 +1,6 @@
 import java.util.Scanner;
-import calculomedia.CalculoMedia;
-import condicaoaprovacao.CondicaoAprovacao;
 import java.util.Locale;
+import java.text.DecimalFormat;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -173,16 +172,76 @@ public class App {
             // Resultado da media
             double media;
             if (ponderadaOuAritmerica == 1) {
-                media = CalculoMedia.calcularMediaPonderada(alunos[i], pesoNotas);
+                media = calcularMediaPonderada(alunos[i], pesoNotas);
             } else {
-                media = CalculoMedia.calcularMediaAritmetica(alunos[i]);
+                media = calcularMediaAritmetica(alunos[i]);
             }
 
             System.out.printf("\nMédia do aluno " + nomesAlunos[i] + ": " + media + "\n");
-            CondicaoAprovacao.CondicaoMedia(media, mediaAprovacao, mediaRecuperacao);
+            CondicaoMedia(media, mediaAprovacao, mediaRecuperacao);
         }
 
         ler.close();
 
     }
+
+    private static void CondicaoMedia(double media, double mediaAprovacao, double mediaRecuperacao) {
+
+        if (media >= mediaAprovacao) {
+
+            System.out.printf("Aluno Aprovado!\n");
+
+        } else if (media < mediaAprovacao && media >= mediaRecuperacao) {
+
+            System.out.printf("Recuperacao!\n");
+
+        } else {
+
+            System.out.printf("Aluno Reprovado!\n");
+        }
+    }
+
+    private static double calcularMediaAritmetica(double[] notas) {
+
+        double soma, mediaFinal;
+
+        soma = 0;
+
+        for (int i = 0; i < notas.length; i++) {
+            soma += notas[i];
+        }
+
+        DecimalFormat formato = new DecimalFormat("#.#");
+
+        mediaFinal = soma / notas.length;
+
+        String mediaFormatadaString = formato.format(mediaFinal);
+        mediaFormatadaString = mediaFormatadaString.replace(',', '.');
+
+        return Double.parseDouble(mediaFormatadaString);
+    }
+
+    private static double calcularMediaPonderada(double[] notas, double[][] pesoNotas) {
+
+        double soma, somaPesos, mediaFinal;
+
+        soma = 0;
+        somaPesos = 0;
+
+        for (int i = 0; i < notas.length; i++) {
+            soma += notas[i] * pesoNotas[i][0];
+            somaPesos += pesoNotas[i][0];
+        }
+
+        DecimalFormat formato = new DecimalFormat("#.#");
+
+        mediaFinal = soma / somaPesos;
+
+        String mediaFormatadaString = formato.format(mediaFinal);
+        mediaFormatadaString = mediaFormatadaString.replace(',', '.');
+
+        return Double.parseDouble(mediaFormatadaString);
+
+    }
+
 }
